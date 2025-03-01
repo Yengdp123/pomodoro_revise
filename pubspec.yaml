@@ -24,3 +24,4 @@ flutter:
   assets:
     - assets/animation/cell.json
     - assets/animation/wiggle.json
+    - assets/animation/homescreen.png

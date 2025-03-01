@@ -93,60 +93,73 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
       appBar: AppBar(
         title: Text('Pomodoro Timer'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Lottie.asset(
-              'assets/animation/cell.json',
-              controller: _controller,
-              onLoaded: (composition) {
-                _controller.duration = Duration(seconds: workTime); // Set duration to work time
-              },
-            ), // Lottie animation
-            SizedBox(height: 20),
-            Text(
-              isWorkTime ? 'Pomodoro Timer' : 'Time\'s Up!',
-              style: TextStyle(fontSize: 32),
-            ),
-            Text(
-              '${(remainingTime ~/ 60).toString().padLeft(2, '0')}:${(remainingTime % 60).toString().padLeft(2, '0')}',
-              style: TextStyle(fontSize: 48),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: stopTimer,
-                  child: Text('Stop'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // Background color
-                    foregroundColor: Colors.white, // Text color
+      body: Stack(
+        children: <Widget>[
+          Image.asset(
+            'assets/animation/homescreen.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Container(
+            color: Colors.yellow.withOpacity(0.5), // Optional overlay for better contrast
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Lottie.asset(
+                    'assets/animation/cell.json',
+                    controller: _controller,
+                    onLoaded: (composition) {
+                      _controller.duration = Duration(seconds: workTime); // Set duration to work time
+                    },
+                  ), // Lottie animation
+                  SizedBox(height: 20),
+                  Text(
+                    isWorkTime ? 'Pomodoro Timer' : 'Time\'s Up!',
+                    style: TextStyle(fontSize: 32),
                   ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: startTimer,
-                  child: Text('Start'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green, // Background color
-                    foregroundColor: Colors.white, // Text color
+                  Text(
+                    '${(remainingTime ~/ 60).toString().padLeft(2, '0')}:${(remainingTime % 60).toString().padLeft(2, '0')}',
+                    style: TextStyle(fontSize: 48),
                   ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: resetTimer,
-                  child: Text('Reset'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // Background color
-                    foregroundColor: Colors.white, // Text color
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: stopTimer,
+                        child: Text('Stop'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange, // Background color
+                          foregroundColor: Colors.white, // Text color
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: startTimer,
+                        child: Text('Start'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green, // Background color
+                          foregroundColor: Colors.white, // Text color
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: resetTimer,
+                        child: Text('Reset'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange, // Background color
+                          foregroundColor: Colors.white, // Text color
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -159,36 +172,49 @@ class NextPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Time\'s Up!'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: 400, // Set the desired width
-              height: 400, // Set the desired height
-              child: Lottie.asset(
-                'assets/animation/wiggle.json',
-                repeat: true, // Make the animation loop
+      body: Stack(
+        children: <Widget>[
+          Image.asset(
+            'assets/animation/homescreen.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Container(
+            color: Colors.yellow.withOpacity(0.5), // Optional overlay for better contrast
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 400, // Set the desired width
+                    height: 400, // Set the desired height
+                    child: Lottie.asset(
+                      'assets/animation/wiggle.json',
+                      repeat: true, // Make the animation loop
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Time\'s Up!',
+                    style: TextStyle(fontSize: 32),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Define your continue action here
+                    },
+                    child: Text('Continue'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green, // Background color
+                      foregroundColor: Colors.white, // Text color
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Time\'s Up!',
-              style: TextStyle(fontSize: 32),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Define your continue action here
-              },
-              child: Text('Continue'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Background color
-                foregroundColor: Colors.white, // Text color
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
