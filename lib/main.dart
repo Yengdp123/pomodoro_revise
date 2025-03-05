@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart'; // Ensure you have this import
 import 'dart:async';
+import 'package:assets_audio_player/assets_audio_player.dart'; // Import the assets_audio_player package
 
 void main() => runApp(MyApp());
 
@@ -31,6 +32,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
   bool isWorkTime = true;
   Timer? timer;
   late AnimationController _controller;
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer(); // Initialize the AssetsAudioPlayer
 
   @override
   void initState() {
@@ -61,6 +63,12 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
           timer.cancel();
           _controller.stop();
           _controller.value = 1.0; // Finish the animation
+
+          // Play the times up sound effect
+          _assetsAudioPlayer.open(
+            Audio('assets/animation/timesup.mp3'),
+          );
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => NextPage()),
@@ -85,6 +93,13 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
       remainingTime = isWorkTime ? workTime : breakTime;
       _controller.reset();
     });
+  }
+
+  // Function to play the button click sound
+  void playButtonClickSound() {
+    _assetsAudioPlayer.open(
+      Audio('assets/animation/Tap.mp3'),
+    );
   }
 
   @override
@@ -128,7 +143,10 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: stopTimer,
+                        onPressed: () {
+                          playButtonClickSound();
+                          stopTimer();
+                        },
                         child: Text('Stop'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange, // Background color
@@ -137,7 +155,10 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
                       ),
                       SizedBox(width: 10),
                       ElevatedButton(
-                        onPressed: startTimer,
+                        onPressed: () {
+                          playButtonClickSound();
+                          startTimer();
+                        },
                         child: Text('Start'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green, // Background color
@@ -146,7 +167,10 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
                       ),
                       SizedBox(width: 10),
                       ElevatedButton(
-                        onPressed: resetTimer,
+                        onPressed: () {
+                          playButtonClickSound();
+                          resetTimer();
+                        },
                         child: Text('Reset'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange, // Background color
@@ -166,6 +190,15 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
 }
 
 class NextPage extends StatelessWidget {
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer(); // Initialize the AssetsAudioPlayer
+
+  // Function to play the button click sound
+  void playButtonClickSound() {
+    _assetsAudioPlayer.open(
+      Audio('assets/animation/Tap.mp3'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,6 +235,7 @@ class NextPage extends StatelessWidget {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
+                      playButtonClickSound();
                       // Define your continue action here
                     },
                     child: Text('Continue'),

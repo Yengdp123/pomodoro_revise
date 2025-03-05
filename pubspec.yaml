@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   lottie: ^3.3.1
+  assets_audio_player: ^3.1.1
 
 dev_dependencies:
   flutter_test:
@@ -25,3 +26,5 @@ flutter:
     - assets/animation/cell.json
     - assets/animation/wiggle.json
     - assets/animation/homescreen.png
+    - assets/animation/Tap.mp3
+    - assets/animation/timesup.mp3
