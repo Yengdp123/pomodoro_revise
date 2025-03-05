@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart'; // Ensure you have this import
+import 'package:lottie/lottie.dart';
 import 'dart:async';
-import 'package:assets_audio_player/assets_audio_player.dart'; // Import the assets_audio_player package
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,14 +25,14 @@ class PomodoroTimer extends StatefulWidget {
 }
 
 class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProviderStateMixin {
-  static const int workTime = 10; // 10 seconds
-  static const int breakTime = 5; // 5 seconds
+  static const int workTime = 10;
+  static const int breakTime = 5;
   int remainingTime = workTime;
   bool isRunning = false;
   bool isWorkTime = true;
   Timer? timer;
   late AnimationController _controller;
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer(); // Initialize the AssetsAudioPlayer
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
     });
   }
 
-  // Function to play the button click sound
+
   void playButtonClickSound() {
     _assetsAudioPlayer.open(
       Audio('assets/animation/Tap.mp3'),
@@ -117,7 +117,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
             height: double.infinity,
           ),
           Container(
-            color: Colors.yellow.withOpacity(0.5), // Optional overlay for better contrast
+            color: Colors.yellow.withOpacity(0.5),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +126,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
                     'assets/animation/cell.json',
                     controller: _controller,
                     onLoaded: (composition) {
-                      _controller.duration = Duration(seconds: workTime); // Set duration to work time
+                      _controller.duration = Duration(seconds: workTime);
                     },
                   ), // Lottie animation
                   SizedBox(height: 20),
@@ -190,7 +190,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> with SingleTickerProvider
 }
 
 class NextPage extends StatelessWidget {
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer(); // Initialize the AssetsAudioPlayer
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
   // Function to play the button click sound
   void playButtonClickSound() {
@@ -214,7 +214,7 @@ class NextPage extends StatelessWidget {
             height: double.infinity,
           ),
           Container(
-            color: Colors.yellow.withOpacity(0.5), // Optional overlay for better contrast
+            color: Colors.yellow.withOpacity(0.5),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
